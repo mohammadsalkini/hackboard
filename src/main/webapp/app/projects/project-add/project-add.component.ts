@@ -3,12 +3,11 @@ import { ProjectDto, ProjectService } from '../../api';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'jhi-add',
-  templateUrl: './add.component.html',
+  templateUrl: './project-add.component.html',
   styles: []
 })
 export class ProjectAddComponent implements OnInit {
-  private data: ProjectDto = { title: '', description: '', ownerId: 0 };
+  data: ProjectDto = { title: '', description: '', ownerId: 0 };
 
   constructor(private projectService: ProjectService, private router: Router) {}
 

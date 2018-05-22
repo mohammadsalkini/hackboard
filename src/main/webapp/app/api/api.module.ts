@@ -4,13 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
 
 import { ProjectService } from './api/project.service';
+import { ProjectRoleService } from './api/projectRole.service';
 
 @NgModule({
   imports:      [ CommonModule, HttpClientModule ],
   declarations: [],
   exports:      [],
   providers: [
-    ProjectService ]
+    ProjectService,
+    ProjectRoleService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {

@@ -1,4 +1,6 @@
 // My style
+@import url('https://fonts.googleapis.com/css?family=Acme|Archivo+Narrow|Bangers|Cabin+Condensed|Handlee|Indie+Flower|Pacifico|Permanent+Marker');
+
 .lightBlue {
   color: #4f797f;
 }
@@ -13,4 +15,83 @@
 }
 .beige {
   color: #f3b06c;
+}
+.log {
+  font-size: 4em;
+  color: #01233f;
+  align-content: center;
+}
+.MyBtn {
+  background-color: #4f797f;
+  color: #e78200;
+  font-size: 16px;
+  font-family: 'Acme', sans-serif;
+  text-transform: text-capitalize;
+  padding: 15px 25px;
+}
+.MyShadow {
+  box-shadow: 5px 10px 18px #f3af6cc4;
+}
+.MyListFont {
+  color: #702d2a;
+  font-weight: initial;
+}
+.MyImg {
+  width: 100px;
+
+  /* #1 */
+  border: 5px solid hsl(0, 0%, 40%);
+
+  /* #2 */
+  padding: 5px;
+  background: hsl(0, 0%, 20%);
+
+  /* #3 */
+  outline: 5px solid hsl(0, 0%, 60%);
+
+  /* #4 AND INFINITY!!! (CSS3 only) */
+  box-shadow: 0 0 0 10px hsl(0, 0%, 80%), 0 0 0 15px hsl(0, 0%, 90%);
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  font-size: 20px;
+  color: rgba(27, 26, 26, 0.74);
+  line-height: 50px;
+  text-align: center;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltiptext::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.circle:hover .tooltiptext {
+  visibility: visible;
 }

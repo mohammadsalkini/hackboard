@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectDto, ProjectService } from '../../api';
 
 @Component({
-  templateUrl: './list.component.html',
-  styles: []
+  templateUrl: './project-list.component.html',
+  styles: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-  private projects: Array<ProjectDto>;
-  private data: ProjectDto = { id: 0, title: '', description: '', ownerId: 0 };
+  projects: Array<ProjectDto>;
+
   constructor(private projectService: ProjectService) {}
 
   ngOnInit() {
