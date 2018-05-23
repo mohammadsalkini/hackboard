@@ -1,3 +1,3 @@
 export * from './projectDto';
-export * from './projectDtoRoles';
 export * from './projectRoleDto';
+export * from './tagDto';

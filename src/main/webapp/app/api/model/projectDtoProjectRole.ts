@@ -11,8 +11,8 @@
  */
 
 
-export interface ProjectRoleDto {
-    roleName: string;
-    color: string;
+export interface ProjectDtoProjectRole {
+    roleName?: string;
+    color?: string;
     count?: number;
 }

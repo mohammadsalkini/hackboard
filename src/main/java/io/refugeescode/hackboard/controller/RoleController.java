@@ -4,7 +4,6 @@ package io.refugeescode.hackboard.controller;
 import io.refugeescode.hackboard.repository.ProjectRoleRepository;
 
 import io.refugeescode.hackboard.service.dto.ProjectRoleDto;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -22,7 +21,6 @@ public class RoleController {
     public RoleController(ProjectRoleRepository projectRoleRepository) {
         this.projectRoleRepository = projectRoleRepository;
     }
-
 
     public ResponseEntity<List<ProjectRoleDto>> listProjectRoles() {
 

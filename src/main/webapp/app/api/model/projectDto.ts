@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ProjectDtoRoles } from './projectDtoRoles';
+import { ProjectRoleDto } from './projectRoleDto';
 
 
 export interface ProjectDto {
@@ -19,5 +19,6 @@ export interface ProjectDto {
     ownerId?: number;
     ownerFirstName?: string;
     ownerLastName?: string;
-    roles?: Array<ProjectDtoRoles>;
+    github?: string;
+    projectRole?: Array<ProjectRoleDto>;
 }
