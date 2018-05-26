@@ -27,9 +27,9 @@
 
     *-->
 
-        <include file="config/liquibase/changelog/github_database.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/github_database.xml" relativeToChangelogFile="false"/>
 
-        <!--******************************************tag************************************************-->
+    <!--******************************************tag************************************************-->
     <include file="config/liquibase/changelog/tag_database.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/tag_database_seeding.xml" relativeToChangelogFile="false"/>
     <!--***************************************project_tag_relation***********************************-->
@@ -37,5 +37,58 @@
     <include file="config/liquibase/changelog/project_tag_seeding.xml" relativeToChangelogFile="false"/>
 
 
+    <!--********************************* Add User Story Table Mohamed Dahman**************************************-->
+    <include file="config/liquibase/changelog/project_story.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/project_story_seeding.xml" relativeToChangelogFile="false"/>
+    <!--********************************* Add User Story Table Mohamed Dahman**************************************-->
+
+
+    <!--***************************************drop competency***********************************-->
+    <include file="config/liquibase/changelog/competency_database_drop.xml" relativeToChangelogFile="false"/>
+    <!--***************************************github***********************************-->
+    <include file="config/liquibase/changelog/github_database.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/github_data_seeding.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+
+
+    <!--***************************************add Project Role Mohamed Dahman***********************************-->
+    <include file="config/liquibase/changelog/project_role/xml/project_role_database_seeding1.xml"
+             relativeToChangelogFile="false"/>
+
+    <include file="config/liquibase/changelog/project_role/xml/project_role_relation_seeding1.xml"
+             relativeToChangelogFile="false"/>
+    <!--*************************************** applicant  ***********************************-->
+    <include file="config/liquibase/changelog/applicant_database.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/applicant_database_seeding.xml" relativeToChangelogFile="false"/>
+    <!--***************************************Project Role ***********************************-->
+    <!--***************************************Project_applicant_relation ***********************************-->
+    <include file="config/liquibase/changelog/project_applicant_relation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/project_applicant_relation_seeding.xml" relativeToChangelogFile="false"/>
+
+
+
+    <!--***********************update  user Profile to include Github Account Mohamed Dahman issue #77*****************************-->
+    <include file="config/liquibase/changelog/user_profile/user_profile_github.xml" relativeToChangelogFile="false"/>
+
+   <include file="config/liquibase/changelog/user_profile/user_profile_github_seeding.xml" relativeToChangelogFile="false"/>
+
+    <!--***********************update  user Profile to include Github Account Mohamed Dahman*****************************-->
+
+    <!--***********************update  user Profile to include description  Account Mohamed Dahman issue #77*****************************-->
+        <include file="config/liquibase/changelog/user_profile/user_profile_description.xml" relativeToChangelogFile="false"/>
+        <include file="config/liquibase/changelog/user_profile/user_profile_description_seeding.xml" relativeToChangelogFile="false"/>
+
+    <!--***********************update  user Profile to include Github Account Mohamed Dahman*****************************-->
+
+
+
+    <!--***********************update  user Profile to include tags  Mohamed Dahman issue #77*****************************-->
+        <include file="config/liquibase/changelog/user_profile/user_profile_tags.xml" relativeToChangelogFile="false"/>
+        <include file="config/liquibase/changelog/user_profile/user_profile_tags_seeding.xml" relativeToChangelogFile="false"/>
+    <!--***********************update  user Profile to include Github Account Mohamed Dahman*****************************-->
+
+
+
+
+
 </databaseChangeLog>

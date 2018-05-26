@@ -1,5 +1,5 @@
 import { ProjectRoleService } from './../../api/api/projectRole.service';
-import { ProjectDtoRoles } from './../../api/model/projectDtoRoles';
+import { ProjectRoleDto } from './../../api/model/projectRoleDto';
 import { Component, OnInit } from '@angular/core';
 import { ProjectDto, ProjectService } from '../../api';
 import { Router } from '@angular/router';
@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class ProjectAddComponent implements OnInit {
-  data: ProjectDto = { title: '', description: '', ownerId: 0 };
-  roleData: ProjectDtoRoles = { roleName: '', color: '' };
-  roles: Array<ProjectDtoRoles>;
+  data: ProjectDto = { title: '', description: '', ownerId: 0, github: '' };
+  roleData: ProjectRoleDto = { roleName: '', color: '', count: 0 };
+  roles: Array<ProjectRoleDto>;
 
   constructor(
     private projectService: ProjectService,
@@ -20,7 +20,7 @@ export class ProjectAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.projectRoleService.listProjectRoles().subscribe(roles => (this.roles = this.roles));
+    this.projectRoleService.listProjectRoles().subscribe(roles => (this.roles = roles));
   }
 
   submit() {

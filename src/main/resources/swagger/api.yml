@@ -224,10 +224,18 @@ definitions:
         type: "string"
       github:
         type: "string"
+      project_story:
+        type: array
+        items:
+          type: "string"
       projectRole:
         type: array
         items:
             $ref: '#/definitions/ProjectRoleDto'
+      ApplicantDto:
+        type: array
+        items:
+          $ref: '#/definitions/ApplicantDto'
 
   ProjectRoleDto:
           type: "object"
@@ -242,7 +250,6 @@ definitions:
             count:
                type: "integer"
                format: "int64"
-
   TagDto:
         type: "object"
         required:
@@ -250,3 +257,20 @@ definitions:
         properties:
           tag:
             type: "string"
+
+  ApplicantDto:
+        type: "object"
+        required:
+          - "user_id"
+          - "project_id"
+          - "role_id"
+        properties:
+          user_id:
+            type: "integer"
+            format: "int64"
+          project_id:
+            type: "integer"
+            format: "int64"
+          role_id:
+             type: "integer"
+             format: "int64"

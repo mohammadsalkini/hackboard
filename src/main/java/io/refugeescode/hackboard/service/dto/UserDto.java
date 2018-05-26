@@ -53,6 +53,28 @@ public class UserDto {
 
     private Set<String> authorities;
 
+    private String github;
+
+    private String description;
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
+    }
+
+
     public UserDto() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +92,8 @@ public class UserDto {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.github  =user.getGithub();
+        this.description = user.getDescription();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
