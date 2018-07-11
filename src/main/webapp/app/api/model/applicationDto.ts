@@ -11,7 +11,14 @@
  */
 
 
-export interface CompetencyDto {
-    id?: number;
-    title: string;
+export interface ApplicationDto {
+    id: number;
+    applicant: number;
+    projectId: number;
+    roleId: number;
+    applicantFullName?: string;
+    roleName?: string;
+    roleColor?: string;
+    userGithub?: string;
+    status: number;
 }

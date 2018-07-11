@@ -18,14 +18,14 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { ApplicantDto } from '../model/applicantDto';
+import { ApplicationDto } from '../model/applicationDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class ApplicantService {
+export class ApplicationService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -57,18 +57,18 @@ export class ApplicantService {
 
 
     /**
-     * Add a new applicant
+     * Add a new application
      * 
-     * @param applicant 
+     * @param application 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addApplicant(applicant: ApplicantDto, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public addApplicant(applicant: ApplicantDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public addApplicant(applicant: ApplicantDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
-    public addApplicant(applicant: ApplicantDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (applicant === null || applicant === undefined) {
-            throw new Error('Required parameter applicant was null or undefined when calling addApplicant.');
+    public addapplication(application: ApplicationDto, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public addapplication(application: ApplicationDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public addapplication(application: ApplicationDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public addapplication(application: ApplicationDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (application === null || application === undefined) {
+            throw new Error('Required parameter application was null or undefined when calling addapplication.');
         }
 
         let headers = this.defaultHeaders;
@@ -90,8 +90,8 @@ export class ApplicantService {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
 
-        return this.httpClient.post<boolean>(`${this.basePath}/applicants`,
-            applicant,
+        return this.httpClient.post<boolean>(`${this.basePath}/application`,
+            application,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -102,18 +102,22 @@ export class ApplicantService {
     }
 
     /**
-     * Delete applicant
+     * Delete an application
      * 
-     * @param applicantId ID of applicant
+     * @param projectId ID of project
+     * @param roleId ID of role
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteApplicant(applicantId: number, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
-    public deleteApplicant(applicantId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
-    public deleteApplicant(applicantId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
-    public deleteApplicant(applicantId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (applicantId === null || applicantId === undefined) {
-            throw new Error('Required parameter applicantId was null or undefined when calling deleteApplicant.');
+    public delapplication(projectId: number, roleId: number, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public delapplication(projectId: number, roleId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public delapplication(projectId: number, roleId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public delapplication(projectId: number, roleId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling delapplication.');
+        }
+        if (roleId === null || roleId === undefined) {
+            throw new Error('Required parameter roleId was null or undefined when calling delapplication.');
         }
 
         let headers = this.defaultHeaders;
@@ -131,7 +135,7 @@ export class ApplicantService {
         let consumes: string[] = [
         ];
 
-        return this.httpClient.delete<boolean>(`${this.basePath}/applicants/${encodeURIComponent(String(applicantId))}`,
+        return this.httpClient.delete<boolean>(`${this.basePath}/application/${encodeURIComponent(String(projectId))}/${encodeURIComponent(String(roleId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -142,54 +146,26 @@ export class ApplicantService {
     }
 
     /**
-     * List all applicant
+     * update  an application status
      * 
+     * @param projectId ID of project
+     * @param roleId ID of role
+     * @param statusId ID of Status 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listApplicants(observe?: 'body', reportProgress?: boolean): Observable<Array<ApplicantDto>>;
-    public listApplicants(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ApplicantDto>>>;
-    public listApplicants(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ApplicantDto>>>;
-    public listApplicants(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+    public editstatusapplication(projectId: number, roleId: number, statusId: number, observe?: 'body', reportProgress?: boolean): Observable<boolean>;
+    public editstatusapplication(projectId: number, roleId: number, statusId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<boolean>>;
+    public editstatusapplication(projectId: number, roleId: number, statusId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<boolean>>;
+    public editstatusapplication(projectId: number, roleId: number, statusId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling editstatusapplication.');
         }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-        ];
-
-        return this.httpClient.get<Array<ApplicantDto>>(`${this.basePath}/applicants`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * View applicant
-     * 
-     * @param applicantId ID of applicant
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public viewApplicant(applicantId: number, observe?: 'body', reportProgress?: boolean): Observable<ApplicantDto>;
-    public viewApplicant(applicantId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ApplicantDto>>;
-    public viewApplicant(applicantId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ApplicantDto>>;
-    public viewApplicant(applicantId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (applicantId === null || applicantId === undefined) {
-            throw new Error('Required parameter applicantId was null or undefined when calling viewApplicant.');
+        if (roleId === null || roleId === undefined) {
+            throw new Error('Required parameter roleId was null or undefined when calling editstatusapplication.');
+        }
+        if (statusId === null || statusId === undefined) {
+            throw new Error('Required parameter statusId was null or undefined when calling editstatusapplication.');
         }
 
         let headers = this.defaultHeaders;
@@ -207,7 +183,48 @@ export class ApplicantService {
         let consumes: string[] = [
         ];
 
-        return this.httpClient.get<ApplicantDto>(`${this.basePath}/applicants/${encodeURIComponent(String(applicantId))}`,
+        return this.httpClient.put<boolean>(`${this.basePath}/application/${encodeURIComponent(String(projectId))}/${encodeURIComponent(String(roleId))}/${encodeURIComponent(String(statusId))}`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get All Roles for Application
+     * 
+     * @param projectId ID of project
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getRoleApplication(projectId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<number>>;
+    public getRoleApplication(projectId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<number>>>;
+    public getRoleApplication(projectId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<number>>>;
+    public getRoleApplication(projectId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (projectId === null || projectId === undefined) {
+            throw new Error('Required parameter projectId was null or undefined when calling getRoleApplication.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<number>>(`${this.basePath}/application/${encodeURIComponent(String(projectId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

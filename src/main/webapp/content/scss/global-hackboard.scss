@@ -1,5 +1,7 @@
 // My style
 @import url('https://fonts.googleapis.com/css?family=Acme|Archivo+Narrow|Bangers|Cabin+Condensed|Handlee|Indie+Flower|Pacifico|Permanent+Marker');
+@import url('https://fonts.googleapis.com/css?family=IM+Fell+French+Canon+SC|Pacifico|Playfair+Display|Slabo+27px|Source+Serif+Pro');
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 .lightBlue {
   color: #4f797f;
@@ -7,8 +9,12 @@
 .red {
   background: #702d2a;
 }
+.darkBlue1 {
+  color: #051522;
+  text-shadow: 0 0 14px #f8f8f8;
+}
 .darkBlue {
-  color: #01233f;
+  color: #0c3150;
 }
 .orange {
   color: #e78200;
@@ -16,60 +22,64 @@
 .beige {
   color: #f3b06c;
 }
+.bblack {
+  color: #051522;
+  box-shadow: 3px 3px 3px #01233f;
+  // width: 8em;
+  // height: 3em;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 19px;
+  background: #f3f2f2ab;
+}
 .log {
   font-size: 3em;
   color: #01233f;
+  margin-right: 449px;
+  margin-top: 16px;
 }
 .MyBtn {
   background-color: #4f797f;
   color: #e78200;
   font-size: 16px;
   font-family: 'Acme', sans-serif;
-  text-transform: text-capitalize;
-  padding: 15px 25px;
+  padding-top: 12px;
+  padding-bottom: 15px;
 }
 .MyShadow {
-  box-shadow: 5px 10px 18px #f3af6cc4;
+  box-shadow: 3px 3px 3px #f3af6cc4;
+  width: 8em;
+  height: 3em;
+  margin-left: 5px;
 }
 .MyListFont {
-  color: #702d2a;
-  font-weight: initial;
+  color: rgb(67, 111, 126);
+  font-size: 19px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500 !important;
 }
-.MyImg {
-  width: 100px;
-
-  /* #1 */
-  border: 5px solid hsl(0, 0%, 40%);
-
-  /* #2 */
-  padding: 5px;
-  background: hsl(0, 0%, 20%);
-
-  /* #3 */
-  outline: 5px solid hsl(0, 0%, 60%);
-
-  /* #4 AND INFINITY!!! (CSS3 only) */
-  box-shadow: 0 0 0 10px hsl(0, 0%, 80%), 0 0 0 15px hsl(0, 0%, 90%);
-}
-
 .circle {
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  background-color: rgba(211, 211, 211, 0.952);
   font-size: 20px;
+  border-style: solid;
+  margin-left: 10px;
+  border-width: 2px;
   color: rgba(27, 26, 26, 0.74);
-  line-height: 50px;
+  line-height: 30px;
   text-align: center;
 }
 
 .tooltiptext {
   visibility: hidden;
   width: 100px;
-  background-color: black;
-  color: #fff;
+  background-color: #c98b39c7;
+  color: rgb(48, 48, 114);
+  font-weight: bold;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -84,13 +94,60 @@
   content: '';
   position: absolute;
   top: 100%;
-  left: 50%;
+  right: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
+  border-color: rgb(127, 177, 144) transparent transparent transparent;
 }
 
 .circle:hover .tooltiptext {
   visibility: visible;
+}
+button.styled {
+  color: #fff;
+  background: #00b48c; /* CHANGE ONLY THIS ONE AND SEE IT HAPPEN ;) */
+  padding: 10px 45px 10px 15px;
+  border-radius: 4px;
+  /* Do not edit below */
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+button.styled:after {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 11px;
+  content: '\25be'; /* \25bc \25be */
+  /* Do not edit below */
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.button-clicked {
+  background: green;
+}
+p {
+  font-size: 16px;
+}
+.paragraphHead {
+  font-family: 'Pacifico', cursive;
+  margin-left: 20px;
+}
+.ff {
+  background-color: #31818d;
+  color: #e08712;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px #b9650ac4;
+  margin-left: 25px;
+  font-size: 17px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.carousel {
+  width: 70%;
+  margin: auto;
+  margin-top: 5px;
 }

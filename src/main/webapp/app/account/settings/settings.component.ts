@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
-
 import { Principal, AccountService, JhiLanguageHelper } from '../../shared';
+import { TagService } from '../../api';
 
 @Component({
-  selector: 'jhi-settings',
   templateUrl: './settings.component.html'
 })
 export class SettingsComponent implements OnInit {
@@ -12,24 +11,29 @@ export class SettingsComponent implements OnInit {
   success: string;
   settingsAccount: any;
   languages: any[];
+  value: any;
+  tags: Array<string> = [];
+  selectedTags: Array<string> = [];
 
   constructor(
     private account: AccountService,
     private principal: Principal,
     private languageService: JhiLanguageService,
-    private languageHelper: JhiLanguageHelper
+    private languageHelper: JhiLanguageHelper,
+    private tagService: TagService
   ) {}
 
   ngOnInit() {
     this.principal.identity().then(account => {
       this.settingsAccount = this.copyAccount(account);
-    });
-    this.languageHelper.getAll().then(languages => {
-      this.languages = languages;
+      this.tagService.showAllTags().subscribe(tags => (this.tags = tags));
+      this.languageHelper.getAll().then(languages => (this.languages = languages));
+      this.selectedTags = this.settingsAccount.tags;
     });
   }
 
   save() {
+    // this.settingsAccount.tags = this.selectedTags;
     this.account.save(this.settingsAccount).subscribe(
       () => {
         this.error = null;
@@ -49,7 +53,6 @@ export class SettingsComponent implements OnInit {
       }
     );
   }
-
   copyAccount(account) {
     return {
       activated: account.activated,
@@ -60,7 +63,27 @@ export class SettingsComponent implements OnInit {
       lastName: account.lastName,
       description: account.description,
       login: account.login,
+      tags: account.tags,
       imageUrl: account.imageUrl
     };
+  }
+  selected(value: any): void {
+    console.log('Selected value is: ', value);
+  }
+
+  removed(value: any): void {
+    console.log('Removed value is: ', value);
+  }
+
+  refreshValue(value: any): void {
+    this.value = value;
+  }
+
+  rolesToString(value: Array<any> = []): string {
+    return value
+      .map((item: any) => {
+        return item.text;
+      })
+      .join(',');
   }
 }

@@ -3,7 +3,7 @@ package io.refugeescode.hackboard.service.dto;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.refugeescode.hackboard.service.dto.ApplicantDto;
+import io.refugeescode.hackboard.service.dto.ApplicationDto;
 import io.refugeescode.hackboard.service.dto.ProjectRoleDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,20 +37,30 @@ public class ProjectDto   {
   @JsonProperty("ownerLastName")
   private String ownerLastName = null;
 
+  @JsonProperty("ownerLoginName")
+  private String ownerLoginName = null;
+
+  @JsonProperty("color")
+  private String color = null;
+
   @JsonProperty("github")
   private String github = null;
 
-  @JsonProperty("project_story")
+  @JsonProperty("projectStories")
   @Valid
-  private List<String> projectStory = null;
+  private List<String> projectStories = null;
 
   @JsonProperty("projectRole")
   @Valid
   private List<ProjectRoleDto> projectRole = null;
 
-  @JsonProperty("ApplicantDto")
+  @JsonProperty("applicationDto")
   @Valid
-  private List<ApplicantDto> applicantDto = null;
+  private List<ApplicationDto> applicationDto = null;
+
+  @JsonProperty("tags")
+  @Valid
+  private List<String> tags = null;
 
   public ProjectDto id(Long id) {
     this.id = id;
@@ -174,6 +184,46 @@ public class ProjectDto   {
     this.ownerLastName = ownerLastName;
   }
 
+  public ProjectDto ownerLoginName(String ownerLoginName) {
+    this.ownerLoginName = ownerLoginName;
+    return this;
+  }
+
+  /**
+   * Get ownerLoginName
+   * @return ownerLoginName
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getOwnerLoginName() {
+    return ownerLoginName;
+  }
+
+  public void setOwnerLoginName(String ownerLoginName) {
+    this.ownerLoginName = ownerLoginName;
+  }
+
+  public ProjectDto color(String color) {
+    this.color = color;
+    return this;
+  }
+
+  /**
+   * Get color
+   * @return color
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
   public ProjectDto github(String github) {
     this.github = github;
     return this;
@@ -194,32 +244,32 @@ public class ProjectDto   {
     this.github = github;
   }
 
-  public ProjectDto projectStory(List<String> projectStory) {
-    this.projectStory = projectStory;
+  public ProjectDto projectStories(List<String> projectStories) {
+    this.projectStories = projectStories;
     return this;
   }
 
-  public ProjectDto addProjectStoryItem(String projectStoryItem) {
-    if (this.projectStory == null) {
-      this.projectStory = new ArrayList<>();
+  public ProjectDto addProjectStoriesItem(String projectStoriesItem) {
+    if (this.projectStories == null) {
+      this.projectStories = new ArrayList<>();
     }
-    this.projectStory.add(projectStoryItem);
+    this.projectStories.add(projectStoriesItem);
     return this;
   }
 
   /**
-   * Get projectStory
-   * @return projectStory
+   * Get projectStories
+   * @return projectStories
   **/
   @ApiModelProperty(value = "")
 
 
-  public List<String> getProjectStory() {
-    return projectStory;
+  public List<String> getProjectStories() {
+    return projectStories;
   }
 
-  public void setProjectStory(List<String> projectStory) {
-    this.projectStory = projectStory;
+  public void setProjectStories(List<String> projectStories) {
+    this.projectStories = projectStories;
   }
 
   public ProjectDto projectRole(List<ProjectRoleDto> projectRole) {
@@ -251,33 +301,61 @@ public class ProjectDto   {
     this.projectRole = projectRole;
   }
 
-  public ProjectDto applicantDto(List<ApplicantDto> applicantDto) {
-    this.applicantDto = applicantDto;
+  public ProjectDto applicationDto(List<ApplicationDto> applicationDto) {
+    this.applicationDto = applicationDto;
     return this;
   }
 
-  public ProjectDto addApplicantDtoItem(ApplicantDto applicantDtoItem) {
-    if (this.applicantDto == null) {
-      this.applicantDto = new ArrayList<>();
+  public ProjectDto addApplicationDtoItem(ApplicationDto applicationDtoItem) {
+    if (this.applicationDto == null) {
+      this.applicationDto = new ArrayList<>();
     }
-    this.applicantDto.add(applicantDtoItem);
+    this.applicationDto.add(applicationDtoItem);
     return this;
   }
 
   /**
-   * Get applicantDto
-   * @return applicantDto
+   * Get applicationDto
+   * @return applicationDto
   **/
   @ApiModelProperty(value = "")
 
   @Valid
 
-  public List<ApplicantDto> getApplicantDto() {
-    return applicantDto;
+  public List<ApplicationDto> getApplicationDto() {
+    return applicationDto;
   }
 
-  public void setApplicantDto(List<ApplicantDto> applicantDto) {
-    this.applicantDto = applicantDto;
+  public void setApplicationDto(List<ApplicationDto> applicationDto) {
+    this.applicationDto = applicationDto;
+  }
+
+  public ProjectDto tags(List<String> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public ProjectDto addTagsItem(String tagsItem) {
+    if (this.tags == null) {
+      this.tags = new ArrayList<>();
+    }
+    this.tags.add(tagsItem);
+    return this;
+  }
+
+  /**
+   * Get tags
+   * @return tags
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public List<String> getTags() {
+    return tags;
+  }
+
+  public void setTags(List<String> tags) {
+    this.tags = tags;
   }
 
 
@@ -296,15 +374,18 @@ public class ProjectDto   {
         Objects.equals(this.ownerId, projectDto.ownerId) &&
         Objects.equals(this.ownerFirstName, projectDto.ownerFirstName) &&
         Objects.equals(this.ownerLastName, projectDto.ownerLastName) &&
+        Objects.equals(this.ownerLoginName, projectDto.ownerLoginName) &&
+        Objects.equals(this.color, projectDto.color) &&
         Objects.equals(this.github, projectDto.github) &&
-        Objects.equals(this.projectStory, projectDto.projectStory) &&
+        Objects.equals(this.projectStories, projectDto.projectStories) &&
         Objects.equals(this.projectRole, projectDto.projectRole) &&
-        Objects.equals(this.applicantDto, projectDto.applicantDto);
+        Objects.equals(this.applicationDto, projectDto.applicationDto) &&
+        Objects.equals(this.tags, projectDto.tags);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, description, ownerId, ownerFirstName, ownerLastName, github, projectStory, projectRole, applicantDto);
+    return Objects.hash(id, title, description, ownerId, ownerFirstName, ownerLastName, ownerLoginName, color, github, projectStories, projectRole, applicationDto, tags);
   }
 
   @Override
@@ -318,10 +399,13 @@ public class ProjectDto   {
     sb.append("    ownerId: ").append(toIndentedString(ownerId)).append("\n");
     sb.append("    ownerFirstName: ").append(toIndentedString(ownerFirstName)).append("\n");
     sb.append("    ownerLastName: ").append(toIndentedString(ownerLastName)).append("\n");
+    sb.append("    ownerLoginName: ").append(toIndentedString(ownerLoginName)).append("\n");
+    sb.append("    color: ").append(toIndentedString(color)).append("\n");
     sb.append("    github: ").append(toIndentedString(github)).append("\n");
-    sb.append("    projectStory: ").append(toIndentedString(projectStory)).append("\n");
+    sb.append("    projectStories: ").append(toIndentedString(projectStories)).append("\n");
     sb.append("    projectRole: ").append(toIndentedString(projectRole)).append("\n");
-    sb.append("    applicantDto: ").append(toIndentedString(applicantDto)).append("\n");
+    sb.append("    applicationDto: ").append(toIndentedString(applicationDto)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -39,8 +39,10 @@ public class ProjectRoleMapper {
         else
         {
             ProjectRoleDto projectRoleDto = new ProjectRoleDto();
+            projectRoleDto.setId(projectRole.getId());
             projectRoleDto.setRoleName(projectRole.getRoleName());
             projectRoleDto.setColor(projectRole.getColor());
+            projectRoleDto.setCount(1L);
             return projectRoleDto;
         }
     }
@@ -52,4 +54,6 @@ public class ProjectRoleMapper {
             .map(this::projectRoleToProjectRoleDto)
             .collect(Collectors.toList());
     }
+
+
 }

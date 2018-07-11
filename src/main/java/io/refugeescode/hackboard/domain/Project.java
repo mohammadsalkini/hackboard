@@ -1,9 +1,13 @@
 package io.refugeescode.hackboard.domain;
 
+import lombok.Data;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import java.io.Serializable;
 
@@ -15,6 +19,7 @@ import java.util.Set;
 /**
  *
  */
+@Data
 @Entity
 @Table(name = "project")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -40,29 +45,12 @@ public class Project implements Serializable {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(
         name = "project_role_relation",
         joinColumns = {@JoinColumn(name = "project_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private List<ProjectRole> projectRoles;
-
-
-    public List<String> getProject_story() {
-        return project_story;
-    }
-
-    public void setProject_story(List<String> project_story) {
-        this.project_story = project_story;
-    }
-
-    @ElementCollection( targetClass = String.class )
-    @CollectionTable(name="project_story", joinColumns=@JoinColumn(name="project_id",referencedColumnName ="id"))
-    @Column(name="description")
-    private List<String> project_story = new ArrayList<>();
-
-
-
+    private List<ProjectRole> projectRoles = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -71,41 +59,11 @@ public class Project implements Serializable {
         inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})
     private Set<Tag> tags;
 
-    public Set<Applicant> getApplicants() {
-        return applicants;
+    public Project() {
     }
-
-    public void setApplicants(Set<Applicant> applicants) {
-        this.applicants = applicants;
-    }
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "project_applicant_relation",
-        joinColumns = {@JoinColumn(name = "project_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "applicant_id", referencedColumnName = "id")})
-    private Set<Applicant> applicants;
 
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public String getGithub() {
-        return github;
-    }
-
-    public void setGithub(String github) {
-        this.github = github;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
 
     public Project title(String title) {
         this.title = title;
@@ -118,31 +76,13 @@ public class Project implements Serializable {
     }
 
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     public Project description(String description) {
         this.description = description;
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User user) {
-        this.owner = user;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+       // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -164,20 +104,32 @@ public class Project implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "Project{" +
-            "id=" + getId() +
-            ", title='" + getTitle() + "'" +
-            ", description='" + getDescription() + "'" +
-            "}";
-    }
-
     public List<ProjectRole> getProjectRoles() {
         return projectRoles;
     }
 
     public void setProjectRoles(List<ProjectRole> projectRoles) {
         this.projectRoles = projectRoles;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", description='" + description + '\'' +
+            ", github='" + github + '\'' +
+            ", owner=" + owner +
+            ", projectRoles=" + projectRoles +
+            ", tags=" + tags +
+            '}';
     }
 }

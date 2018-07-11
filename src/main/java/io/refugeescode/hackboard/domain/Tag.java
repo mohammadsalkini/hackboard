@@ -1,9 +1,12 @@
 package io.refugeescode.hackboard.domain;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "tag")
 public class Tag {
@@ -14,19 +17,6 @@ public class Tag {
     @Column(name = "tag")
     String tag;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
+    public Tag() {
     }
 }

@@ -5,7 +5,7 @@
  */
 package io.refugeescode.hackboard.web.api.controller;
 
-import io.refugeescode.hackboard.service.dto.ApplicantDto;
+import io.refugeescode.hackboard.service.dto.ApplicationDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -29,10 +29,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Api(value = "applicants", description = "the applicants API")
-public interface ApplicantsApi {
+@Api(value = "application", description = "the application API")
+public interface ApplicationApi {
 
-    Logger log = LoggerFactory.getLogger(ApplicantsApi.class);
+    Logger log = LoggerFactory.getLogger(ApplicationApi.class);
 
     default Optional<ObjectMapper> getObjectMapper() {
         return Optional.empty();
@@ -46,13 +46,13 @@ public interface ApplicantsApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
-    @ApiOperation(value = "Add a new applicant", nickname = "addApplicant", notes = "", response = Boolean.class, tags={ "applicant", })
+    @ApiOperation(value = "Add a new application", nickname = "addapplication", notes = "", response = Boolean.class, tags={ "application", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Boolean.class) })
-    @RequestMapping(value = "/applicants",
+    @RequestMapping(value = "/application",
         produces = { "application/json" }, 
         method = RequestMethod.POST)
-    default ResponseEntity<Boolean> addApplicant(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ApplicantDto applicant) {
+    default ResponseEntity<Boolean> addapplication(@ApiParam(value = "" ,required=true )  @Valid @RequestBody ApplicationDto application) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -63,19 +63,19 @@ public interface ApplicantsApi {
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicantsApi interface so no example is generated");
+            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicationApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 
-    @ApiOperation(value = "Delete applicant", nickname = "deleteApplicant", notes = "", response = Boolean.class, tags={ "applicant", })
+    @ApiOperation(value = "Delete an application", nickname = "delapplication", notes = "", response = Boolean.class, tags={ "application", })
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Boolean.class) })
-    @RequestMapping(value = "/applicants/{applicant_id}",
+    @RequestMapping(value = "/application/{projectId}/{roleId}",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    default ResponseEntity<Boolean> deleteApplicant(@ApiParam(value = "ID of applicant",required=true) @PathVariable("applicantId") Long applicantId) {
+    default ResponseEntity<Boolean> delapplication(@ApiParam(value = "ID of project",required=true) @PathVariable("projectId") Long projectId,@ApiParam(value = "ID of role",required=true) @PathVariable("roleId") Long roleId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
@@ -86,53 +86,53 @@ public interface ApplicantsApi {
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicantsApi interface so no example is generated");
+            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicationApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 
-    @ApiOperation(value = "List all applicant", nickname = "listApplicants", notes = "", response = ApplicantDto.class, responseContainer = "List", tags={ "applicant", })
+    @ApiOperation(value = "update  an application status", nickname = "editstatusapplication", notes = "", response = Boolean.class, tags={ "application", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = ApplicantDto.class, responseContainer = "List") })
-    @RequestMapping(value = "/applicants",
+        @ApiResponse(code = 200, message = "successful operation", response = Boolean.class) })
+    @RequestMapping(value = "/application/{projectId}/{roleId}/{statusId}",
         produces = { "application/json" }, 
-        method = RequestMethod.GET)
-    default ResponseEntity<List<ApplicantDto>> listApplicants() {
+        method = RequestMethod.PUT)
+    default ResponseEntity<Boolean> editstatusapplication(@ApiParam(value = "ID of project",required=true) @PathVariable("projectId") Long projectId,@ApiParam(value = "ID of role",required=true) @PathVariable("roleId") Long roleId,@ApiParam(value = "ID of Status ",required=true) @PathVariable("statusId") Long statusId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ {  \"user_id\" : 5,  \"project_id\" : 5,  \"role_id\" : 2}, {  \"user_id\" : 5,  \"project_id\" : 5,  \"role_id\" : 2} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("true", Boolean.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicantsApi interface so no example is generated");
+            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicationApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
 
-    @ApiOperation(value = "View applicant", nickname = "viewApplicant", notes = "", response = ApplicantDto.class, tags={ "applicant", })
+    @ApiOperation(value = "Get All Roles for Application", nickname = "getRoleApplication", notes = "", response = Long.class, responseContainer = "List", tags={ "application", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = ApplicantDto.class) })
-    @RequestMapping(value = "/applicants/{applicant_id}",
+        @ApiResponse(code = 200, message = "successful operation", response = Long.class, responseContainer = "List") })
+    @RequestMapping(value = "/application/{projectId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<ApplicantDto> viewApplicant(@ApiParam(value = "ID of applicant",required=true) @PathVariable("applicantId") Long applicantId) {
+    default ResponseEntity<List<Long>> getRoleApplication(@ApiParam(value = "ID of project",required=true) @PathVariable("projectId") Long projectId) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
             if (getAcceptHeader().get().contains("application/json")) {
                 try {
-                    return new ResponseEntity<>(getObjectMapper().get().readValue("{  \"user_id\" : 5,  \"project_id\" : 5,  \"role_id\" : 2}", ApplicantDto.class), HttpStatus.NOT_IMPLEMENTED);
+                    return new ResponseEntity<>(getObjectMapper().get().readValue("[ 0, 0 ]", List.class), HttpStatus.NOT_IMPLEMENTED);
                 } catch (IOException e) {
                     log.error("Couldn't serialize response for content type application/json", e);
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }
         } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicantsApi interface so no example is generated");
+            log.warn("ObjectMapper or HttpServletRequest not configured in default ApplicationApi interface so no example is generated");
         }
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }

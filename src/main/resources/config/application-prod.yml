@@ -27,9 +27,9 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://mysql.refugeescode.io:3306/rc-hackboard?useUnicode=true&characterEncoding=utf8&useSSL=false
-        username: rc-hackboard
-        password: PW3BkTJxtnW695tG
+        url: ${HACKBOARD_DATABASE_URL}
+        username: ${HACKBOARD_DATABASE_USERNAME}
+        password: ${HACKBOARD_DATABASE_PASSWORD}
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -47,10 +47,16 @@ spring:
             hibernate.generate_statistics: false
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.gmail.com
+        port: 587
+        username: no-reply@refugeescode.at
+        password: ${HACKBOARD_EMAIL_PASSWORD}
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
     thymeleaf:
         cache: true
 
@@ -104,7 +110,7 @@ jhipster:
             key: bc857743b9c199cb5a2dd10198b71544a8d73946
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: hackboard@localhost
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
+        base-url: http://hackboard.refugeescode.io # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
         graphite:
